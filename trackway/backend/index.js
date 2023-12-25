@@ -13,10 +13,18 @@ import bookingRoute from "./routes/booking.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
-const corsOptions = {
-  origin: true,
-  credentials: true,
-};
+app.use(cors(
+  {
+      origin: ["https://deploy-mern-frontend.vercel.app"],
+      methods: ["POST", "GET"],
+      credentials: true
+  }
+));
+
+// const corsOptions = {
+//   origin: true,
+//   credentials: true,
+// };
 
 //database connection
 
@@ -39,7 +47,7 @@ const connect = async () => {
 //middlewares
 
 app.use(express.json());
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.get("/",(req,res)=>{
